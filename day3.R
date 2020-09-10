@@ -62,7 +62,7 @@ a[[1]]
 
 new_a <- unlist(a[1])
 a[1]
-new_a
+new_a   #####이거 값 왜이러지
 
 names(a) <- NULL
 names(new_a) <- NULL
@@ -129,7 +129,7 @@ for(data in month.name)
   cat(data)
 
 
-# i가 10이상이면 끝
+# i가 10이상이면 끝(i를 10으로 나눈 나머지가 0, 즉 10일 때 break)
 sum <- 0
 for(i in 5:15){
   if(i%%10==0){    
@@ -164,8 +164,8 @@ for(i in 5:15){
 
 for(data in month.name) 
   print(data)
-for(data in month.name)print(data);print("ㅋㅋ")
-for(data in month.name){print(data);print("ㅋㅋ")}
+for(data in month.name)print(data);print("끝!")
+for(data in month.name){print(data);print("끝!")}
 
 
 for(n in 1:5)
@@ -229,13 +229,13 @@ for(i in 1:9){
 sumNumber <- 0
 while(sumNumber <= 20) { 
   i <- sample(1:5, 1)    # 1~5중 하나의 난수 추출 
-  sumNumber <-sumNumber+i; 
+  sumNumber <-sumNumber+i
   cat(sumNumber,"\n")
 } 
 
 
 # repeat: 무한루프
-# [while=True] 와 동일
+# [while True] 와 동일
 repeat {
   cat("ㅋㅋㅋ\n")
 }
