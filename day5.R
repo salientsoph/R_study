@@ -182,6 +182,8 @@ write.csv(page, "movie_reviews.csv")
 
 
 
+
+
 text<- NULL; vtitle<-NULL; vpoint<-NULL; vreview<-NULL; page=NULL
 url<- "http://movie.naver.com/movie/point/af/list.nhn?page=1"
 text <- read_html(url,  encoding="CP949")
