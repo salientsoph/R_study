@@ -8,35 +8,30 @@ Sys.sleep(3)
 
 pageLink <- NULL
 reple <- NULL
-curr_PageOldNum <- 0
 
   
 # 리뷰을 한 페이지 단위로 출력 
 repeat{
   doms <- remDr$findElements(using = "css selector", "div.review_desc > p")
-  Sys.sleep(1)
   reple_v <- sapply(doms, function (x) {x$getElementText()})
-  print(reple_v)
-  
-  # 댓글이 지금까지 몇 개인지
   reple <- append(reple, unlist(reple_v))
-  cat(length(reple), "\n")
+  Sys.sleep(1)
   
-  # click 이벤트 발생
-  pageLink <- remDr$findElements(using='css',"div.hotel_used_review.ng-isolate-scope > div.review_ta.ng-scope > div.paginate > a.direction.next")
-  remDr$executeScript("arguments[0].click();",pageLink)
-  Sys.sleep(2)
   
-  # 더이상 읽을 페이지가 없으면 -> 종료 (null 값을 비교,, length를 확인해서 disabled가 추가된 ) 
-  curr_PageElem <- remDr$findElement(using='css',"div.hotel_used_review.ng-isolate-scope > div.review_ta.ng-scope > div.paginate strong")
-  curr_PageNewNum <- as.numeric(curr_PageElem$getElementText())
-  cat(paste(curr_PageOldNum, ':', curr_PageNewNum,'\n'))
-  if(curr_PageNewNum == curr_PageOldNum)  {
-    cat("종료\n")
-    break; 
+# click 이벤트 발생
+  pageLink <- remDr$findElements(using='css',"div.review_ta.ng-scope > div.paginate > a.direction.next")
+
+  nextpage <- remDr$findElements(using='css selector',"div.review_ta.ng-scope > div.paginate > a.direction.next.disabled")
+  
+# '다음'버튼이 disabled이면 list에 해당 element값을 하나 리턴하므로 length가 1이됨.
+  if(length(nextpage) == 0){
+    pageLink$clickElement()
+    Sys.sleep(2)
+  }else{
+    break;
   }
-  curr_PageOldNum <- curr_PageNewNum;
 }
   
-cat(length(reple), "개의 댓글 추출\n")
-write(reple,"naverhotel.txt")
+  
+write(reple, "naverhotel.txt")
+  
