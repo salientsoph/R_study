@@ -192,7 +192,7 @@ write(repl_v, "yes24.txt")
 
 
 
-# 스타벅스
+# 스타벅스 서울 전체 매장 정보 크롤링 & 스크래핑 1
 
 library(RSelenium)
 
@@ -248,7 +248,7 @@ for(i in 1 : as.numeric(limit)){
 
 
 
-# 스타벅스 
+# 스타벅스 서울 전체 매장 정보 크롤링 & 스크래핑 2
 
 library(RSelenium)
 
@@ -304,6 +304,7 @@ repeat{
   #스크롤 다운
   if(index %% 3 == 0 && index != total)
     remDr$executeScript("var dom=document.querySelectorAll('#mCSB_3_container > ul > li')[arguments[0]]; dom.scrollIntoView();", list(index))
+    # 세번째 li 태그 중에 scrollintoview 함수
 }
 write.csv(starbucks, "starbucks.csv")
 
@@ -316,3 +317,4 @@ storeContent <- sapply(storePage,function(x){x$getElementText()})
 
 write(unlist(storeContent), file="result.txt")
 head(storeContent, 10)
+
